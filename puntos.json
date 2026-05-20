@@ -1,0 +1,93 @@
+[
+  {
+    "id": "punto-1",
+    "nombre": "Punto 1",
+    "categoria": "sin_clasificar",
+    "x": 203.6,
+    "y": 332.17
+  },
+  {
+    "id": "punto-2",
+    "nombre": "Punto 2",
+    "categoria": "sin_clasificar",
+    "x": 328.16,
+    "y": 415.21
+  },
+  {
+    "id": "punto-3",
+    "nombre": "Punto 3",
+    "categoria": "sin_clasificar",
+    "x": 473.49,
+    "y": 505.18
+  },
+  {
+    "id": "punto-4",
+    "nombre": "Punto 4",
+    "categoria": "sin_clasificar",
+    "x": 660.33,
+    "y": 602.06
+  },
+  {
+    "id": "punto-5",
+    "nombre": "Punto 5",
+    "categoria": "sin_clasificar",
+    "x": 771.06,
+    "y": 685.1
+  },
+  {
+    "id": "punto-6",
+    "nombre": "Punto 6",
+    "categoria": "sin_clasificar",
+    "x": 950.98,
+    "y": 795.83
+  },
+  {
+    "id": "punto-7",
+    "nombre": "Punto 7",
+    "categoria": "sin_clasificar",
+    "x": 1123.99,
+    "y": 692.02
+  },
+  {
+    "id": "punto-8",
+    "nombre": "Punto 8",
+    "categoria": "sin_clasificar",
+    "x": 971.74,
+    "y": 602.06
+  },
+  {
+    "id": "punto-9",
+    "nombre": "Punto 9",
+    "categoria": "sin_clasificar",
+    "x": 812.58,
+    "y": 498.26
+  },
+  {
+    "id": "punto-10",
+    "nombre": "Punto 10",
+    "categoria": "sin_clasificar",
+    "x": 681.09,
+    "y": 422.13
+  },
+  {
+    "id": "punto-11",
+    "nombre": "Punto 11",
+    "categoria": "sin_clasificar",
+    "x": 501.17,
+    "y": 283.73
+  },
+  {
+    "id": "punto-12",
+    "nombre": "Punto 12",
+    "categoria": "sin_clasificar",
+    "x": 791.82,
+    "y": 318.33
+  },
+  {
+    "id": "punto-13",
+    "nombre": "Punto 13",
+    "categoria": "sin_clasificar",
+    "x": 999.43,
+    "y": 456.74
+  }
+]
