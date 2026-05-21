@@ -1,93 +1,114 @@
 [
   {
-    "id": "punto-1",
-    "nombre": "Punto 1",
-    "categoria": "sin_clasificar",
-    "x": 203.6,
-    "y": 332.17
+    "id": "C-1",
+    "nombre": "Contenedor 1",
+    "categoria": "Contenedor de PET",
+    "x": 249.99,
+    "y": 358.84
   },
   {
-    "id": "punto-2",
-    "nombre": "Punto 2",
-    "categoria": "sin_clasificar",
-    "x": 328.16,
-    "y": 415.21
+    "id": "C-2",
+    "nombre": "Contenedor 2",
+    "categoria": "Contenedor de PET",
+    "x": 480.95,
+    "y": 347.84
   },
   {
-    "id": "punto-3",
-    "nombre": "Punto 3",
-    "categoria": "sin_clasificar",
-    "x": 473.49,
-    "y": 505.18
+    "id": "C-3",
+    "nombre": "Contenedor 3",
+    "categoria": "Contenedor de PET",
+    "x": 766.89,
+    "y": 257.66
   },
   {
-    "id": "punto-4",
-    "nombre": "Punto 4",
-    "categoria": "sin_clasificar",
-    "x": 660.33,
-    "y": 602.06
+    "id": "C-4",
+    "nombre": "Contenedor 4",
+    "categoria": "Contenedor de PET",
+    "x": 386.37,
+    "y": 526
   },
   {
-    "id": "punto-5",
-    "nombre": "Punto 5",
-    "categoria": "sin_clasificar",
-    "x": 771.06,
-    "y": 685.1
+    "id": "C-5",
+    "nombre": "Contenedor 5",
+    "categoria": "Contenedor de PET",
+    "x": 476.55,
+    "y": 504.01
   },
   {
-    "id": "punto-6",
-    "nombre": "Punto 6",
-    "categoria": "sin_clasificar",
-    "x": 950.98,
-    "y": 795.83
+    "id": "C-6",
+    "nombre": "Contenedor 6",
+    "categoria": "Contenedor de PET",
+    "x": 657.37,
+    "y": 436.94
   },
   {
-    "id": "punto-7",
-    "nombre": "Punto 7",
-    "categoria": "sin_clasificar",
-    "x": 1123.99,
-    "y": 692.02
+    "id": "C-7",
+    "nombre": "Contenedor 7",
+    "categoria": "Contenedor de PET",
+    "x": 644.68,
+    "y": 370.32
   },
   {
-    "id": "punto-8",
-    "nombre": "Punto 8",
-    "categoria": "sin_clasificar",
-    "x": 971.74,
-    "y": 602.06
+    "id": "C-8",
+    "nombre": "Contenedor 8",
+    "categoria": "Contenedor de PET",
+    "x": 758.9,
+    "y": 509.91
   },
   {
-    "id": "punto-9",
-    "nombre": "Punto 9",
-    "categoria": "sin_clasificar",
-    "x": 812.58,
-    "y": 498.26
+    "id": "C-9",
+    "nombre": "Contenedor 9",
+    "categoria": "Contenedor de PET",
+    "x": 980.98,
+    "y": 468.67
   },
   {
-    "id": "punto-10",
-    "nombre": "Punto 10",
-    "categoria": "sin_clasificar",
-    "x": 681.09,
-    "y": 422.13
+    "id": "C-10",
+    "nombre": "Contenedor 10",
+    "categoria": "Contenedor de PET",
+    "x": 876.29,
+    "y": 535.3
   },
   {
-    "id": "punto-11",
-    "nombre": "Punto 11",
-    "categoria": "sin_clasificar",
-    "x": 501.17,
-    "y": 283.73
+    "id": "C-11",
+    "nombre": "Contenedor 11",
+    "categoria": "Contenedor de PET",
+    "x": 727.17,
+    "y": 655.85
   },
   {
-    "id": "punto-12",
-    "nombre": "Punto 12",
-    "categoria": "sin_clasificar",
-    "x": 791.82,
-    "y": 318.33
+    "id": "C-12",
+    "nombre": "Contenedor 12",
+    "categoria": "Contenedor de PET",
+    "x": 1060.3,
+    "y": 557.5
   },
   {
-    "id": "punto-13",
-    "nombre": "Punto 13",
-    "categoria": "sin_clasificar",
-    "x": 999.43,
-    "y": 456.74
+    "id": "C-13",
+    "nombre": "Contenedor 13",
+    "categoria": "Contenedor de PET",
+    "x": 898.49,
+    "y": 725.65
+  },
+  {
+    "id": "C-14",
+    "nombre": "Contenedor 14",
+    "categoria": "Contenedor de PET",
+    "x": 1031.74,
+    "y": 678.06
+  },
+  {
+    "id": "C-15",
+    "nombre": "Contenedor 15",
+    "categoria": "Contenedor de PET",
+    "x": 1034.92,
+    "y": 760.55
+  },
+  {
+    "id": "C-16",
+    "nombre": "Contenedor 16",
+    "categoria": "Contenedor de PET",
+    "x": 1196.72,
+    "y": 541.64
   }
 ]
