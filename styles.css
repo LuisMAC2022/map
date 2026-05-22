@@ -1,0 +1,41 @@
+:root {
+  --panel: #ffffff;
+  --ink: #1f2937;
+  --muted: #4b5563;
+  --line: #d1d5db;
+  --surface: #f3f4f6;
+  --accent: #111827;
+  --success: #065f46;
+  --warning: #92400e;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; color: var(--ink); background: var(--surface); }
+.skip-link { position: absolute; left: -999px; top: .5rem; background: #fff; padding: .5rem .75rem; }
+.skip-link:focus { left: .5rem; z-index: 20; }
+.app-shell { display: grid; grid-template-columns: minmax(0, 1fr) 360px; min-height: 100vh; }
+.map-stage { padding: 1rem; overflow: auto; }
+#stage svg { width: min(100%, 1180px); height: auto; background: #fff; border: 1px solid var(--line); }
+.control-panel { padding: 1rem; border-left: 1px solid var(--line); background: var(--panel); overflow: auto; display: grid; gap: .9rem; }
+h1 { margin: 0; font-size: 1.25rem; }
+h2 { margin: 0 0 .4rem; font-size: 1rem; }
+p { margin: 0; color: var(--muted); }
+.filter-list, .result-list { display: grid; gap: .5rem; }
+button, input { font: inherit; padding: .6rem .75rem; border: 1px solid var(--line); border-radius: .55rem; background: #fff; }
+button:focus-visible, input:focus-visible, .result-card:focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; }
+button[data-active="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+.info-card { border: 1px solid var(--line); border-radius: .75rem; padding: .75rem; background: #f9fafb; min-height: 3.5rem; }
+.result-card { border: 1px solid var(--line); border-radius: .7rem; background: #fff; text-align: left; }
+.result-card[data-active="true"] { outline: 2px solid #111827; }
+.notification { min-height: 1.2rem; font-weight: 600; }
+.notification.success { color: var(--success); }
+.notification.warning { color: var(--warning); }
+.marker circle { fill: #7fff00; stroke: white; stroke-width: 4; vector-effect: non-scaling-stroke; }
+.marker[data-active="true"] circle { stroke: #f59e0b; stroke-width: 7; }
+.marker[data-collected="true"] circle { fill: #22c55e; }
+@media (max-width: 900px) {
+  .app-shell { grid-template-columns: 1fr; grid-template-rows: 56vh auto; }
+  .control-panel { border-left: 0; border-top: 1px solid var(--line); }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+}
