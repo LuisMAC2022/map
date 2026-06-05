@@ -12,8 +12,9 @@
       --line: #d1d5db;
       --surface: #f3f4f6;
       --accent: #111827;
-      --marker: #7fff00;
-      --marker-active: #7fff00;
+      --marker-pet: #3f8f00;
+      --marker-bathroom: #2563eb;
+      --marker-active: #fbbf24;
     }
 
     * {
@@ -28,13 +29,30 @@
       background: var(--surface);
     }
 
-    app-shell {
+    .skip-link {
+      position: absolute;
+      top: .75rem;
+      left: .75rem;
+      z-index: 10;
+      transform: translateY(-150%);
+      border-radius: .5rem;
+      padding: .65rem .85rem;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .app-shell {
       display: grid;
       grid-template-columns: minmax(0, 1fr) 340px;
       min-height: 100vh;
     }
 
-    map-stage {
+    .map-stage {
       position: relative;
       display: grid;
       place-items: center;
@@ -49,7 +67,7 @@
       background-position: 0 0, 0 12px, 12px -12px, -12px 0;
     }
 
-    map-stage svg {
+    .map-stage svg {
       width: min(100%, 1180px);
       height: auto;
       max-height: calc(100vh - 2rem);
@@ -59,7 +77,7 @@
       touch-action: manipulation;
     }
 
-    control-panel {
+    .control-panel {
       display: flex;
       flex-direction: column;
       gap: .75rem;
@@ -107,18 +125,18 @@
       border-color: var(--accent);
     }
 
-    filter-list {
+    .filter-list {
       display: flex;
       flex-wrap: wrap;
       gap: .5rem;
     }
 
-    result-list {
+    .result-list {
       display: grid;
       gap: .5rem;
     }
 
-    result-card {
+    .result-card {
       display: grid;
       gap: .2rem;
       border: 1px solid var(--line);
@@ -128,22 +146,33 @@
       cursor: pointer;
     }
 
-    result-card:hover,
-    result-card[data-active="true"] {
+    .result-card:hover,
+    .result-card:focus-visible,
+    .result-card[data-active="true"] {
       outline: 2px solid #111827;
       outline-offset: 1px;
     }
 
-    result-card strong {
+    h2 {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.25;
+    }
+
+    .result-card {
+      text-align: left;
+    }
+
+    .result-card strong {
       font-size: .95rem;
     }
 
-    result-card span {
+    .result-card span {
       color: var(--muted);
       font-size: .85rem;
     }
 
-    info-card {
+    .info-card {
       display: grid;
       gap: .35rem;
       border: 1px solid var(--line);
@@ -158,23 +187,31 @@
     }
 
     .marker circle {
-      fill: var(--marker);
+      fill: var(--marker-pet);
       stroke: white;
       stroke-width: 4;
       vector-effect: non-scaling-stroke;
     }
 
     .marker text {
-      font: 700 28px system-ui, sans-serif;
+      font: 800 16px system-ui, sans-serif;
       fill: white;
       text-anchor: middle;
       dominant-baseline: central;
       pointer-events: none;
     }
 
+    .marker--bathroom circle {
+      fill: var(--marker-bathroom);
+    }
+
+    .marker:focus-visible circle {
+      stroke: var(--accent);
+      stroke-width: 7;
+    }
+
     .marker[data-active="true"] circle {
-      fill: var(--marker-active);
-      stroke: #fbbf24;
+      stroke: var(--marker-active);
       stroke-width: 7;
     }
 
@@ -187,21 +224,21 @@
     }
 
     @media (max-width: 840px) {
-      app-shell {
+      .app-shell {
         grid-template-columns: 1fr;
         grid-template-rows: 58vh auto;
       }
 
-      map-stage {
+      .map-stage {
         padding: .5rem;
       }
 
-      map-stage svg {
+      .map-stage svg {
         width: 100%;
         max-height: 56vh;
       }
 
-      control-panel {
+      .control-panel {
         max-height: none;
         border-left: 0;
         border-top: 1px solid var(--line);
@@ -210,42 +247,44 @@
   </style>
 </head>
 <body>
-  <app-shell>
-    <map-stage id="stage" aria-label="Mapa interactivo"></map-stage>
+  <a class="skip-link" href="#contenido">Saltar al mapa</a>
 
-    <control-panel>
+  <div class="app-shell">
+    <main id="contenido" class="map-stage" aria-label="Mapa interactivo" tabindex="-1"></main>
+
+    <aside class="control-panel" aria-labelledby="map-title">
       <header>
-        <h1>Mapa interactivo FES Acatlán</h1>
-        <p>MVP técnico: carga SVG, lee puntos JSON, filtra, busca y muestra ficha.</p>
+        <h1 id="map-title">Mapa interactivo FES Acatlán</h1>
+        <p>Consulta contenedores de PET y baños: filtra, busca y selecciona un punto para ver su ficha.</p>
       </header>
 
-      <label>
+      <label for="search">
         Buscar punto
-        <input id="search" type="search" placeholder="Ej. baño, PET, laboratorio, punto 1">
       </label>
+      <input id="search" type="search" placeholder="Ej. baño, PET, baño 1" autocomplete="off">
 
-      <section>
-        <p>Categorías</p>
-        <filter-list id="filters"></filter-list>
+      <section aria-labelledby="filters-title">
+        <h2 id="filters-title">Categorías</h2>
+        <div class="filter-list" id="filters"></div>
       </section>
 
-      <info-card id="info">
-        <strong>Selecciona un punto</strong>
+      <section class="info-card" id="info" aria-live="polite">
+        <h2>Selecciona un punto</h2>
         <p>Haz clic en un marcador del mapa o en un resultado de la lista.</p>
-      </info-card>
-
-      <section>
-        <p>Resultados</p>
-        <result-list id="results"></result-list>
       </section>
-    </control-panel>
-  </app-shell>
+
+      <section aria-labelledby="results-title">
+        <h2 id="results-title">Resultados</h2>
+        <div class="result-list" id="results"></div>
+      </section>
+    </aside>
+  </div>
 
   <script>
     const SVG_FILE = "mapa_vectorizado.svg";
-    const POINTS_FILE = "puntos.json";
+    const POINT_FILES = ["puntos.json", "bano.json"];
 
-    const stage = document.querySelector("#stage");
+    const stage = document.querySelector("#contenido");
     const search = document.querySelector("#search");
     const filters = document.querySelector("#filters");
     const results = document.querySelector("#results");
@@ -263,12 +302,12 @@
     });
 
     async function start() {
-      const [svgText, loadedPoints] = await Promise.all([
-        fetch(SVG_FILE).then(response => response.text()),
-        fetch(POINTS_FILE).then(response => response.json())
+      const [svgText, ...loadedPointGroups] = await Promise.all([
+        fetch(SVG_FILE).then(readTextResponse),
+        ...POINT_FILES.map(file => fetch(file).then(readJSONResponse))
       ]);
 
-      points = normalizePoints(loadedPoints);
+      points = normalizePoints(loadedPointGroups.flat());
 
       const doc = new DOMParser().parseFromString(svgText, "image/svg+xml");
       svg = doc.documentElement;
@@ -281,6 +320,7 @@
 
       markerLayer = document.createElementNS("http://www.w3.org/2000/svg", "g");
       markerLayer.setAttribute("id", "poi-markers");
+      markerLayer.setAttribute("aria-label", "Puntos de interés del mapa");
       svg.appendChild(markerLayer);
 
       stage.replaceChildren(svg);
@@ -293,6 +333,16 @@
         renderMarkers();
         renderResults();
       });
+    }
+
+    function readTextResponse(response) {
+      if (!response.ok) throw new Error(`No se pudo cargar ${response.url}`);
+      return response.text();
+    }
+
+    function readJSONResponse(response) {
+      if (!response.ok) throw new Error(`No se pudo cargar ${response.url}`);
+      return response.json();
     }
 
     function normalizePoints(rawPoints) {
@@ -348,26 +398,18 @@
         if (!matches(point)) continue;
 
         const marker = document.createElementNS("http://www.w3.org/2000/svg", "g");
-        marker.classList.add("marker");
+        marker.classList.add("marker", getMarkerClass(point));
         marker.dataset.id = point.id;
         marker.dataset.active = String(point.id === activePointId);
         marker.setAttribute("transform", `translate(${point.x} ${point.y})`);
         marker.setAttribute("tabindex", "0");
         marker.setAttribute("role", "button");
-        marker.setAttribute("aria-label", point.nombre);
+        marker.setAttribute("aria-label", `${point.nombre}, ${point.categoria.replaceAll("_", " ")}`);
 
         const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         circle.setAttribute("r", "22");
 
-        const icon = document.createElementNS("http://www.w3.org/2000/svg", "image");
-        icon.setAttribute("href", "pet_icon.svg");
-        icon.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "pet_icon.svg");
-        icon.setAttribute("x", "-12");
-        icon.setAttribute("y", "-12");
-        icon.setAttribute("width", "24");
-        icon.setAttribute("height", "24");
-
-        marker.append(circle, icon);
+        marker.append(circle, createMarkerIcon(point));
 
         marker.addEventListener("click", () => selectPoint(point.id));
         marker.addEventListener("keydown", event => {
@@ -385,7 +427,9 @@
       const visible = points.filter(matches);
 
       results.replaceChildren(...visible.map(point => {
-        const card = document.createElement("result-card");
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "result-card";
         card.dataset.active = String(point.id === activePointId);
         card.innerHTML = `
           <strong>${escapeHTML(point.nombre)}</strong>
@@ -402,7 +446,7 @@
       if (!point) return;
 
       info.innerHTML = `
-        <strong>${escapeHTML(point.nombre)}</strong>
+        <h2>${escapeHTML(point.nombre)}</h2>
         <p><b>Categoría:</b> ${escapeHTML(point.categoria.replaceAll("_", " "))}</p>
         ${point.edificio ? `<p><b>Edificio:</b> ${escapeHTML(point.edificio)}</p>` : ""}
         ${point.piso ? `<p><b>Piso/zona:</b> ${escapeHTML(point.piso)}</p>` : ""}
@@ -417,8 +461,33 @@
       marker?.scrollIntoView({ block: "center", inline: "center", behavior: "smooth" });
     }
 
+    function getMarkerClass(point) {
+      return isBathroom(point) ? "marker--bathroom" : "marker--pet";
+    }
+
+    function createMarkerIcon(point) {
+      if (!isBathroom(point)) {
+        const icon = document.createElementNS("http://www.w3.org/2000/svg", "image");
+        icon.setAttribute("href", "pet_icon.svg");
+        icon.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "pet_icon.svg");
+        icon.setAttribute("x", "-12");
+        icon.setAttribute("y", "-12");
+        icon.setAttribute("width", "24");
+        icon.setAttribute("height", "24");
+        return icon;
+      }
+
+      const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      label.textContent = "WC";
+      return label;
+    }
+
+    function isBathroom(point) {
+      return point.categoria.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("bano");
+    }
+
     function matches(point) {
-      const q = search.value.trim().toLowerCase();
+      const q = normalizeSearchText(search.value.trim());
 
       const byCategory = activeCategory === "todas" || point.categoria === activeCategory;
       if (!byCategory) return false;
@@ -433,9 +502,16 @@
         point.edificio,
         point.piso,
         ...point.tags
-      ].join(" ").toLowerCase();
+      ].join(" ");
 
-      return haystack.includes(q);
+      return normalizeSearchText(haystack).includes(q);
+    }
+
+    function normalizeSearchText(value) {
+      return String(value)
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
     }
 
     function escapeHTML(value) {
