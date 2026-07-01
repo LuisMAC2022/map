@@ -107,7 +107,7 @@
       font-weight: 650;
     }
 
-    input, select, button {
+    input, select, button, .link-button {
       font: inherit;
       border: 1px solid var(--line);
       border-radius: .6rem;
@@ -115,8 +115,23 @@
       background: white;
     }
 
-    button {
+    button, .link-button {
       cursor: pointer;
+    }
+
+    .link-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .link-button:hover,
+    .link-button:focus-visible {
+      outline: 2px solid #111827;
+      outline-offset: 1px;
     }
 
     button[data-active="true"] {
@@ -283,6 +298,7 @@
   <script>
     const SVG_FILE = "mapa_vectorizado.svg";
     const POINT_FILES = ["puntos.json", "bano.json"];
+    const PET_SIMULATOR_FILE = "reciclaje_pet_fase1.html";
 
     const stage = document.querySelector("#contenido");
     const search = document.querySelector("#search");
@@ -346,17 +362,26 @@
     }
 
     function normalizePoints(rawPoints) {
-      return rawPoints.map((point, index) => ({
-        id: String(point.id || `punto-${index + 1}`),
-        nombre: String(point.nombre || point.name || `Punto ${index + 1}`),
-        categoria: String(point.categoria || point.type || "sin_clasificar"),
-        x: Number(point.x),
-        y: Number(point.y),
-        descripcion: String(point.descripcion || point.description || ""),
-        edificio: point.edificio || point.building || "",
-        piso: point.piso || point.floor || "",
-        tags: Array.isArray(point.tags) ? point.tags.map(String) : []
-      })).filter(point => Number.isFinite(point.x) && Number.isFinite(point.y));
+      return rawPoints.map((point, index) => {
+        const normalized = {
+          id: String(point.id || `punto-${index + 1}`),
+          nombre: String(point.nombre || point.name || `Punto ${index + 1}`),
+          categoria: String(point.categoria || point.type || "sin_clasificar"),
+          x: Number(point.x),
+          y: Number(point.y),
+          descripcion: String(point.descripcion || point.description || ""),
+          edificio: point.edificio || point.building || "",
+          piso: point.piso || point.floor || "",
+          tags: Array.isArray(point.tags) ? point.tags.map(String) : [],
+          simulador: point.simulador || point.simulator || ""
+        };
+
+        if (isPETContainer(normalized) && !normalized.simulador) {
+          normalized.simulador = buildPETSimulatorURL(normalized);
+        }
+
+        return normalized;
+      }).filter(point => Number.isFinite(point.x) && Number.isFinite(point.y));
     }
 
     function ensureViewBox(svgElement) {
@@ -434,6 +459,7 @@
         card.innerHTML = `
           <strong>${escapeHTML(point.nombre)}</strong>
           <span>${escapeHTML(point.categoria.replaceAll("_", " "))} · x:${point.x}, y:${point.y}</span>
+          ${point.simulador ? "<span>Instancia PET vinculada</span>" : ""}
         `;
         card.addEventListener("click", () => selectPoint(point.id));
         return card;
@@ -452,6 +478,7 @@
         ${point.piso ? `<p><b>Piso/zona:</b> ${escapeHTML(point.piso)}</p>` : ""}
         ${point.descripcion ? `<p>${escapeHTML(point.descripcion)}</p>` : "<p>Falta descripción humana del punto.</p>"}
         <p><b>Coordenadas SVG:</b> ${point.x}, ${point.y}</p>
+        ${point.simulador ? `<p><a class="link-button" href="${escapeHTML(point.simulador)}">Abrir simulador de este contenedor</a></p>` : ""}
       `;
 
       renderMarkers();
@@ -483,7 +510,20 @@
     }
 
     function isBathroom(point) {
-      return point.categoria.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("bano");
+      return normalizeSearchText(point.categoria).includes("bano");
+    }
+
+    function isPETContainer(point) {
+      const haystack = normalizeSearchText(`${point.id} ${point.nombre} ${point.categoria}`);
+      return haystack.includes("pet") || haystack.includes("contenedor");
+    }
+
+    function buildPETSimulatorURL(point) {
+      const params = new URLSearchParams({
+        contenedor: point.id,
+        nombre: point.nombre
+      });
+      return `${PET_SIMULATOR_FILE}?${params.toString()}`;
     }
 
     function matches(point) {
@@ -501,6 +541,7 @@
         point.descripcion,
         point.edificio,
         point.piso,
+        point.simulador,
         ...point.tags
       ].join(" ");
 
