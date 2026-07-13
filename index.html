@@ -195,6 +195,19 @@
       padding: .8rem;
       background: #f9fafb;
       min-height: 6rem;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .info-card .link-button {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      align-self: stretch;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      text-align: center;
+      line-height: 1.3;
     }
 
     .marker {
@@ -478,7 +491,7 @@
         ${point.piso ? `<p><b>Piso/zona:</b> ${escapeHTML(point.piso)}</p>` : ""}
         ${point.descripcion ? `<p>${escapeHTML(point.descripcion)}</p>` : "<p>Falta descripción humana del punto.</p>"}
         <p><b>Coordenadas SVG:</b> ${point.x}, ${point.y}</p>
-        ${point.simulador ? `<p><a class="link-button" href="${escapeHTML(point.simulador)}">Abrir simulador de este contenedor</a></p>` : ""}
+        ${point.simulador ? `<a class="link-button" href="${escapeHTML(point.simulador)}">Abrir simulador de este contenedor</a>` : ""}
       `;
 
       renderMarkers();
