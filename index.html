@@ -71,7 +71,7 @@
       width: min(100%, 1180px);
       height: auto;
       max-height: calc(100vh - 2rem);
-      background: #fdfdfd url("acatlan.png") center / 100% 100% no-repeat;
+      background: transparent url("acatlan.png") center / 100% 100% no-repeat;
       border: 1px solid var(--line);
       box-shadow: 0 10px 28px rgba(0,0,0,.12);
       touch-action: manipulation;
@@ -320,7 +320,7 @@
     let svg;
     let markerLayer;
     let points = [];
-    let activeCategory = "todas";
+    let activeCategory = null;
     let activePointId = null;
 
     start().catch(error => {
@@ -335,6 +335,7 @@
       ]);
 
       points = normalizePoints(loadedPointGroups.flat());
+      activeCategory = getInitialCategory();
 
       const doc = new DOMParser().parseFromString(svgText, "image/svg+xml");
       svg = doc.documentElement;
@@ -408,8 +409,32 @@
     }
 
     function mostrarFondoAcatlan(svgElement) {
-      const fondoVectorial = svgElement.querySelector(":scope > path");
-      if (fondoVectorial) fondoVectorial.setAttribute("fill-opacity", "0");
+      svgElement.querySelectorAll("[fill]").forEach(element => {
+        if (esBlanco(element.getAttribute("fill"))) {
+          element.setAttribute("fill-opacity", "0");
+        }
+      });
+    }
+
+    function esBlanco(color) {
+      const match = String(color).trim().match(/^#([0-9a-f]{6})$/i);
+      if (!match) return false;
+
+      const channels = match[1].match(/.{2}/g).map(value => parseInt(value, 16));
+      return channels.every(channel => channel >= 248);
+    }
+
+    function getInitialCategory() {
+      return points
+        .map(point => point.categoria)
+        .find(category => !isCategoryDisabled(category)) || null;
+    }
+
+    function isCategoryDisabled(category) {
+      const normalizedCategory = normalizeSearchText(category);
+      return normalizedCategory === "todas"
+        || normalizedCategory === "todos"
+        || normalizedCategory.includes("bano");
     }
 
     function renderFilters() {
@@ -419,8 +444,8 @@
         const button = document.createElement("button");
         button.type = "button";
         button.textContent = category.replaceAll("_", " ");
-        button.dataset.active = String(category === activeCategory);
-        const desactivado = normalizeSearchText(category).includes("bano");
+        const desactivado = isCategoryDisabled(category);
+        button.dataset.active = String(!desactivado && category === activeCategory);
         button.disabled = desactivado;
         button.setAttribute("aria-disabled", String(desactivado));
         if (desactivado) button.title = "Categoría temporalmente desactivada";
