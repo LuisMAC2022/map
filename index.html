@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mapa interactivo FES Acatlán - MVP</title>
+  <title>2 · Mapa de contenedores PET | FES Acatlán</title>
   <style>
     :root {
       --panel: #ffffff;
@@ -87,6 +87,42 @@
       overflow: auto;
       max-height: 100vh;
     }
+
+    .project-nav {
+      display: grid;
+      gap: .4rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .project-nav a {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: .15rem .55rem;
+      align-items: baseline;
+      border: 1px solid var(--line);
+      border-radius: .65rem;
+      padding: .55rem .65rem;
+      color: var(--ink);
+      background: white;
+      text-decoration: none;
+    }
+
+    .project-nav a:hover,
+    .project-nav a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
+
+    .project-nav a[aria-current="page"] {
+      border-color: var(--accent);
+      color: white;
+      background: var(--accent);
+    }
+
+    .project-nav strong { font-size: .84rem; }
+    .project-nav span { color: var(--muted); font-size: .73rem; }
+    .project-nav a[aria-current="page"] span { color: #d1d5db; }
 
     h1 {
       margin: 0;
@@ -273,9 +309,14 @@
     <main id="contenido" class="map-stage" aria-label="Mapa interactivo" tabindex="-1"></main>
 
     <aside class="control-panel" aria-labelledby="map-title">
+      <nav class="project-nav" aria-label="Recorrido integrado del proyecto">
+        <a href="presentacion.html"><strong>1 · Evidencia</strong><span>Problema, modelo y criterios.</span></a>
+        <a href="index.html" aria-current="page"><strong>2 · Mapa</strong><span>Ubica un contenedor de PET.</span></a>
+        <a href="reciclaje_pet_fase1.html"><strong>3 · Simulador</strong><span>Completa el ciclo del MVP.</span></a>
+      </nav>
       <header>
         <h1 id="map-title">Mapa interactivo FES Acatlán</h1>
-        <p>Consulta contenedores de PET y baños: filtra, busca y selecciona un punto para ver su ficha.</p>
+        <p>Selecciona un contenedor de PET para abrir una instancia del simulador y comprobar cómo el acondicionamiento cambia el resultado.</p>
       </header>
 
       <label for="search">

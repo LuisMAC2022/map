@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DEMO — Reciclaje PET Fase 1</title>
+  <title>3 · Simulador del MVP PET | FES Acatlán</title>
   <style>
     :root {
       --bg: #f4f4f1;
@@ -29,6 +29,53 @@
       border-bottom: 1px solid var(--line);
       background: var(--panel);
     }
+
+    .project-nav {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      max-width: 900px;
+      margin: 0 0 14px;
+    }
+
+    .project-nav a {
+      display: grid;
+      gap: 2px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: var(--ink);
+      background: var(--panel);
+      text-decoration: none;
+    }
+
+    .project-nav a:hover,
+    .project-nav a:focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 1px;
+    }
+
+    .project-nav a[aria-current="page"] {
+      border-color: var(--ink);
+      color: white;
+      background: var(--ink);
+    }
+
+    .project-nav strong { font-size: 13px; }
+    .project-nav span { color: var(--muted); font-size: 11px; }
+    .project-nav a[aria-current="page"] span { color: #d8d8d2; }
+
+    .phase-objective {
+      max-width: 900px;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-left: 4px solid var(--ok);
+      background: #edf7f1;
+      color: #24543a;
+      font-size: 13px;
+    }
+
+    .phase-objective a { color: inherit; font-weight: 700; }
 
     h1 { margin: 0; font-size: 22px; }
     .sub { margin-top: 4px; color: var(--muted); font-size: 13px; }
@@ -243,12 +290,22 @@
     @media (max-width: 980px) {
       main { grid-template-columns: 1fr; }
     }
+
+    @media (max-width: 640px) {
+      .project-nav { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1 id="titulo">Simulador de la cadena de valor del reciclaje de PET — Fase 1</h1>
-    <div class="sub" id="subtitulo">MVP hormiga: recolectar → procesar → vender. Sin maquinaria, sin fase industrial.</div>
+    <nav class="project-nav" aria-label="Recorrido integrado del proyecto">
+      <a href="presentacion.html"><strong>1 · Evidencia</strong><span>Problema, modelo y criterios.</span></a>
+      <a href="index.html"><strong>2 · Mapa</strong><span>Ubica un contenedor de PET.</span></a>
+      <a href="reciclaje_pet_fase1.html" aria-current="page"><strong>3 · Simulador</strong><span>Completa el ciclo del MVP.</span></a>
+    </nav>
+    <h1 id="titulo">Fase 3 · Simulador de la cadena de valor del PET</h1>
+    <div class="sub" id="subtitulo">Iteración 1 del MVP: recolectar → procesar → vender. Sin maquinaria ni fase industrial.</div>
+    <div class="phase-objective"><strong>Objetivo mínimo:</strong> completar un ciclo y observar una consecuencia visible de separar o contaminar el material. <a href="presentacion.html#fase-3">Ver validación y tareas de cierre.</a></div>
   </header>
 
   <main>
@@ -861,10 +918,10 @@
 
     function configurarEncabezado() {
       if (!estado) return;
-      document.title = "Simulador PET — " + estado.nombre + " (" + estado.id + ")";
-      document.getElementById("titulo").textContent = "Simulador PET — " + estado.nombre + " (" + estado.id + ")";
+      document.title = "Fase 3 · Simulador PET — " + estado.nombre + " (" + estado.id + ")";
+      document.getElementById("titulo").textContent = "Fase 3 · Simulador PET — " + estado.nombre + " (" + estado.id + ")";
       document.getElementById("subtitulo").textContent =
-        "Recolectar → procesar → vender. Estado global sincronizado y generación Poisson no homogénea independiente por contenedor.";
+        "Iteración 1 del MVP: recolectar → procesar → vender. Estado global sincronizado y generación Poisson no homogénea independiente por contenedor.";
     }
 
     function calcularPrecio(botella) {
