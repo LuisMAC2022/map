@@ -1,10 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Documento reconciliado y laboratorio interactivo para estimar la generación, recuperación y aprovechamiento potencial de PET en FES Acatlán.">
-  <title>El PET de Acatlán | Presentación integrada</title>
+  <meta name="description" content="Estimación, propuesta y simulación del proyecto PET en FES Acatlán, con un tablero de colaboración multidisciplinaria.">
+  <title>El PET de Acatlán | Estimación y propuesta</title>
   <style>
     :root {
       --ink: #17332b;
@@ -200,6 +200,9 @@
     }
     p { margin: 0 0 1rem; }
     .section-aside { color: var(--muted); font-size: 0.92rem; }
+    .subsection-head { margin-top: 3rem; }
+    .applied-criteria { margin-top: 2rem; }
+    .task-source-link { margin-top: 1rem; }
 
     .thesis {
       display: grid;
@@ -652,6 +655,133 @@
     }
     .editorial-notes p { margin: 0; color: var(--muted); font-size: 0.84rem; }
 
+    .onboarding-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin: 2rem 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: onboarding;
+    }
+    .onboarding-steps li {
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card);
+      counter-increment: onboarding;
+    }
+    .onboarding-steps li::before {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: var(--rust);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 800;
+      content: "PASO 0" counter(onboarding);
+    }
+    .onboarding-steps strong { display: block; margin-bottom: 0.25rem; }
+    .onboarding-steps span { display: block; color: var(--muted); font-size: 0.82rem; }
+
+    .task-board {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin: 2rem 0;
+    }
+    .task-card {
+      display: grid;
+      align-content: start;
+      gap: 0.8rem;
+      padding: 1.2rem;
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--green);
+      border-radius: 14px;
+      background: var(--card);
+    }
+    .task-card:has(input:checked) {
+      border-color: var(--green);
+      background: var(--green-soft);
+      box-shadow: 0 0 0 2px rgba(8, 124, 91, 0.12);
+    }
+    .task-card header {
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .task-card h3 { margin: 0; }
+    .task-id {
+      flex: none;
+      color: var(--rust);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+    .task-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .task-meta span {
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      background: var(--paper-2);
+      color: var(--ink-2);
+      font-size: 0.73rem;
+      font-weight: 750;
+    }
+    .task-card p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+    .task-card ul { margin: 0; padding-left: 1.15rem; color: var(--ink-2); font-size: 0.82rem; }
+    .task-card li + li { margin-top: 0.35rem; }
+    .task-choice {
+      display: flex;
+      gap: 0.55rem;
+      align-items: center;
+      width: fit-content;
+      margin-top: auto;
+      padding: 0.55rem 0.7rem;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .task-choice input { width: 1.05rem; height: 1.05rem; accent-color: var(--green); }
+
+    .selection-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(250px, 0.55fr);
+      gap: 1rem;
+      align-items: start;
+      padding: 1.25rem;
+      border-radius: 16px;
+      background: var(--ink);
+      color: #f7f5ed;
+    }
+    .selection-panel h3 { color: #fff; }
+    .selection-panel p { margin-bottom: 0.7rem; color: #c9d6d0; font-size: 0.85rem; }
+    .selection-panel ul { margin: 0; padding-left: 1.2rem; color: #e2ebe7; font-size: 0.85rem; }
+    .selection-form { display: grid; gap: 0.55rem; }
+    .selection-form label { color: #dce7e2; font-size: 0.76rem; font-weight: 750; }
+    .selection-form input {
+      width: 100%;
+      margin-top: 0.2rem;
+      padding: 0.62rem 0.7rem;
+      border: 1px solid #698078;
+      border-radius: 9px;
+      background: #fffdf8;
+      color: var(--ink);
+    }
+    .selection-form button {
+      padding: 0.65rem 0.8rem;
+      border: 1px solid #7ee0bb;
+      border-radius: 9px;
+      background: #7ee0bb;
+      color: #112e25;
+      font-weight: 800;
+    }
+    .selection-form button:disabled { cursor: not-allowed; opacity: 0.5; }
+    #selection-status { min-height: 1.3em; margin: 0; color: #e1c2ac; font-size: 0.78rem; }
+
     footer {
       padding: 2.2rem 0 3rem;
       border-top: 1px solid var(--line);
@@ -665,9 +795,10 @@
       .chain { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .symbol-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .quiz-grid { grid-template-columns: 1fr; }
+      .onboarding-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 680px) {
-      .thesis, .corrections, .protocol, .refs, .editorial-notes { grid-template-columns: 1fr; }
+      .thesis, .corrections, .protocol, .refs, .editorial-notes, .task-board, .selection-panel { grid-template-columns: 1fr; }
       .journey-nav { grid-template-columns: 1fr; }
       .chain { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .equation-sub, .stats { grid-template-columns: 1fr; }
@@ -676,7 +807,7 @@
       .stat strong { font-size: 1.45rem; }
     }
     @media (max-width: 430px) {
-      .chain, .symbol-grid { grid-template-columns: 1fr; }
+      .chain, .symbol-grid, .onboarding-steps { grid-template-columns: 1fr; }
       .wrap { width: min(100% - 1.1rem, 1120px); }
       .lab-shell { border-radius: 18px; }
     }
@@ -685,7 +816,7 @@
       .bar-part { transition: none; }
     }
     @media print {
-      .topnav, .journey-nav, .scenario-buttons, .quiz { display: none; }
+      .topnav, .journey-nav, .scenario-buttons, .quiz, .task-choice, .selection-form { display: none; }
       body { background: #fff; }
       main section { break-inside: avoid; }
       .lab-shell { color: #111; background: #fff; box-shadow: none; border: 1px solid #777; }
@@ -699,8 +830,8 @@
 
   <header class="hero">
     <div class="wrap">
-      <p class="eyebrow">FES Acatlán · modelo didáctico reconciliado</p>
-      <h1>Del PET al <em>prototipo</em>, con evidencia entre ambos.</h1>
+      <p class="eyebrow">FES Acatlán · estimación, propuesta y simulación</p>
+      <h1>Estimar antes de <em>proponer</em>; simular para aprender.</h1>
       <p class="kicker">Un laboratorio para estimar cuánto PET se genera, cuánto se recupera y qué parte podría convertirse en materia prima útil. La interacción hace visibles los supuestos; el aforo los pone a prueba.</p>
       <div class="hero-meta" role="group" aria-label="Estado de los datos">
         <span class="pill verified">Población estudiantil: fuente oficial</span>
@@ -709,29 +840,29 @@
       </div>
       <div class="hero-note"><strong>Alcance.</strong> El documento integra la narrativa de cambio de conducta con el modelo cuantitativo. No afirma que cada botella se convertirá en una prótesis ni que la simulación cambiará por sí sola el comportamiento: ambas son hipótesis que deben validarse.</div>
       <nav class="journey-nav" aria-label="Recorrido integrado del proyecto">
-        <a href="presentacion.html" aria-current="page"><strong>1 · Evidencia</strong><span>Problema, modelo y criterios.</span></a>
-        <a href="index.html"><strong>2 · Mapa</strong><span>Ubica un contenedor de PET.</span></a>
-        <a href="reciclaje_pet_fase1.html"><strong>3 · Simulador</strong><span>Completa el ciclo del MVP.</span></a>
+        <a href="presentacion.html#estimacion" aria-current="page"><strong>1 · Estimación</strong><span>Datos, supuestos y modelo.</span></a>
+        <a href="presentacion.html#propuesta"><strong>2 · Propuesta</strong><span>Hipótesis, MVP y validación.</span></a>
+        <a href="reciclaje_pet_fase1.html"><strong>3 · Simulación</strong><span>Practica el ciclo del MVP.</span></a>
       </nav>
     </div>
   </header>
 
   <nav class="topnav" aria-label="Contenido">
     <div class="wrap">
-      <a href="#proposito">Propósito</a>
+      <a href="#estimacion">Estimación</a>
       <a href="#modelo">Modelo</a>
       <a href="#laboratorio">Laboratorio</a>
       <a href="#validacion">Validación</a>
-      <a href="#problema-solucion">Problema + solución</a>
+      <a href="#propuesta">Propuesta</a>
       <a href="#estado-proyecto">Estado 3–5</a>
       <a href="#fase-3">Fase 3</a>
       <a href="#referencias">Referencias</a>
-      <a href="#tareas-seccion-2">Tareas</a>
+      <a href="#colaborar">Colaborar</a>
     </div>
   </nav>
 
   <main id="contenido">
-    <section id="proposito">
+    <section id="estimacion">
       <div class="wrap">
         <div class="section-head">
           <div>
@@ -1083,11 +1214,11 @@
       </div>
     </section>
 
-    <section id="problema-solucion">
+    <section id="propuesta">
       <div class="wrap">
         <div class="section-head">
           <div>
-            <p class="eyebrow">05 · problemática y solución propuesta</p>
+            <p class="eyebrow">05 · propuesta</p>
             <h2>Saber que el PET es reciclable no garantiza separarlo bien.</h2>
           </div>
           <p class="section-aside">La evidencia disponible permite sostener una brecha entre conciencia, intención y conducta; no permite afirmar todavía qué sabe o hace la comunidad de FES Acatlán. Esa línea base debe medirse.</p>
@@ -1110,18 +1241,18 @@
           <strong>Reformulación clave:</strong> sustituir “no es un problema de información” por “la información por sí sola puede ser insuficiente”. Sustituir “quien juega cambia su conducta” por “se evaluará si la experiencia mejora comprensión y, después, conducta observable”.
         </div>
 
-        <div class="section-head" style="margin-top:3rem">
+        <div class="section-head subsection-head">
           <div>
             <p class="eyebrow">estrategia · dos frentes complementarios</p>
-            <h2>El mapa explica el destino; el simulador permite experimentar las consecuencias.</h2>
+            <h2>La propuesta define la ruta; el simulador permite experimentar las consecuencias.</h2>
           </div>
-          <p class="section-aside">Ambas piezas comparten el mismo mensaje: separar bien conserva opciones de aprovechamiento, pero ninguna sustituye la infraestructura, la trazabilidad ni el proceso técnico.</p>
+          <p class="section-aside">El documento y el MVP comparten el mismo mensaje: separar bien conserva opciones de aprovechamiento, pero ninguno sustituye la infraestructura, la trazabilidad ni el proceso técnico.</p>
         </div>
 
         <div class="thesis">
           <div class="new">
-            <h3>Mapa interactivo</h3>
-            <p>Muestra dónde depositar, quién retira, qué etapas siguen y qué evidencia respalda cada tramo. Su función es reducir incertidumbre operativa y hacer visible la cadena real del campus.</p>
+            <h3>Propuesta documentada</h3>
+            <p>Define alcance, actores, ruta operativa, datos pendientes y criterios de decisión. Su función es reducir ambigüedad y distinguir lo demostrado de lo que aún debe comprobarse.</p>
           </div>
           <div class="new">
             <h3>Simulador de cadena de valor</h3>
@@ -1142,7 +1273,7 @@
           <strong>La mecánica como mensaje:</strong> el PET limpio y trazable conserva más opciones; el material mezclado o contaminado puede exigir separación adicional, reducir desempeño o ser rechazado. La regla económica exacta del juego debe calibrarse con el comprador y el proceso local, no inventarse. <a href="https://doi.org/10.3390/polym14245507">Vaucher et al., 2022</a>
         </div>
 
-        <div class="section-head" style="margin-top:3rem">
+        <div class="section-head subsection-head">
           <div>
             <p class="eyebrow">propósito · del material al prototipo</p>
             <h2>La prótesis es el horizonte narrativo, no una conversión automática.</h2>
@@ -1160,7 +1291,7 @@
         </ol>
         <p class="small muted">Base técnica: <a href="https://doi.org/10.1016/j.cscee.2024.100673">Joseph et al., 2024</a>; <a href="https://doi.org/10.1038/s41598-023-41744-8">Rashwan et al., 2023</a>.</p>
 
-        <div class="section-head" style="margin-top:3rem">
+        <div class="section-head subsection-head">
           <div>
             <p class="eyebrow">evaluación · dos niveles</p>
             <h2>Primero se prueba aprendizaje; después, transferencia al campus.</h2>
@@ -1202,11 +1333,11 @@
             <p class="eyebrow">06B · validación de la fase 3</p>
             <h2>El MVP cumple el mínimo funcional; todavía no cierra la validación de aprendizaje.</h2>
           </div>
-          <p class="section-aside">La revisión se hizo contra el objetivo declarado y contra el comportamiento disponible en el mapa y el simulador. “Funciona” y “produce el cambio esperado” son afirmaciones distintas.</p>
+          <p class="section-aside">La revisión se hizo contra el objetivo declarado y contra el comportamiento disponible en el documento y el simulador. “Funciona” y “produce el cambio esperado” son afirmaciones distintas.</p>
         </div>
 
         <div class="callout">
-          <strong>Veredicto.</strong> Sí se cumple el objetivo mínimo: desde un contenedor del mapa se puede recolectar, acondicionar y vender PET, y la interfaz hace visible cómo la tapa, etiqueta, líquido, humedad y compresión cambian el resultado. La fase 3 solo podrá considerarse validada cuando también exista evidencia de comprensión y una prueba controlada en campus.
+          <strong>Veredicto.</strong> Sí se cumple el objetivo mínimo: la simulación permite generar o esperar, recolectar, acondicionar y vender PET, y hace visible cómo la tapa, etiqueta, líquido, humedad y compresión cambian el resultado. La fase 3 solo podrá considerarse validada cuando también exista evidencia de comprensión y una prueba controlada en campus.
         </div>
 
         <h3 class="audit-title">Matriz de cumplimiento</h3>
@@ -1218,7 +1349,7 @@
             <tbody>
               <tr><td>Ciclo completo del MVP</td><td><span class="state ok">Cumple</span></td><td>Generar o esperar → recolectar → procesar → vender.</td><td>Conservar una prueba de recorrido repetible.</td></tr>
               <tr><td>Consecuencia visible</td><td><span class="state ok">Cumple</span></td><td>Etiquetas de estado, restricciones de orden y penalizaciones de precio.</td><td>Calibrar magnitudes con reglas locales; no presentarlas como precios reales.</td></tr>
-              <tr><td>Vínculo mapa–simulador</td><td><span class="state ok">Cumple</span></td><td>Cada punto PET abre su propia instancia y el simulador permite volver al mapa.</td><td>Probar todos los contenedores y navegación móvil/teclado.</td></tr>
+              <tr><td>Vínculo propuesta–simulación</td><td><span class="state ok">Cumple</span></td><td>El recorrido visible enlaza la propuesta con el simulador y permite regresar al documento.</td><td>Probar enlaces, estado inicial y navegación móvil/teclado.</td></tr>
               <tr><td>Evidencia de aprendizaje</td><td><span class="state pending">Pendiente</span></td><td>No hay medición pre/post ni eventos analíticos de errores, omisiones o finalización.</td><td>Instrumentar y ejecutar un piloto de comprensión.</td></tr>
               <tr><td>Transferencia al campus</td><td><span class="state pending">Pendiente</span></td><td>No hay línea base ni comparación de recuperación o contaminación.</td><td>Medir antes y después con alcance, periodo y regla de decisión predefinidos.</td></tr>
             </tbody>
@@ -1227,7 +1358,7 @@
 
         <h3 class="audit-title">Tareas para cerrar la fase</h3>
         <div class="protocol">
-          <article><h3>Formalizar la prueba de aceptación</h3><p>Definir un recorrido reproducible que compruebe acceso desde el mapa, ciclo completo, ruta limpia, ruta contaminada y regreso al mapa.</p></article>
+          <article><h3>Formalizar la prueba de aceptación</h3><p>Definir un recorrido reproducible que compruebe acceso desde la propuesta, ciclo completo, ruta limpia, ruta contaminada y regreso al documento.</p></article>
           <article><h3>Instrumentar el recorrido</h3><p>Registrar inicio, acciones, bloqueos, errores, precio final, finalización y contenedor sin datos personales innecesarios.</p></article>
           <article><h3>Medir comprensión pre/post</h3><p>Evaluar si la persona distingue generado, recuperado y útil, y anticipa las consecuencias de contaminación.</p></article>
           <article><h3>Calibrar las reglas</h3><p>Sustituir precios y penalizaciones demostrativas con criterios documentados del comprador, gestor y proceso local.</p></article>
@@ -1236,7 +1367,7 @@
         </div>
 
         <div class="callout warning">
-          <strong>Seguimiento versionable:</strong> la lista completa, con prioridad y evidencia de aceptación, está en <a href="FASE_3_TAREAS.md">FASE_3_TAREAS.md</a>.
+          <strong>Seguimiento versionable:</strong> la lista completa, con perfiles sugeridos, dependencias y evidencia de aceptación, está en <a href="TAREAS_PROYECTO.md">TAREAS_PROYECTO.md</a>.
         </div>
       </div>
     </section>
@@ -1268,45 +1399,137 @@
           <li>Vaucher, J., Demongeot, A., Michaud, V., &amp; Leterrier, Y. (2022). Recycling of bottle grade PET: Influence of HDPE contamination on the microstructure and mechanical performance of 3D printed parts. <em>Polymers, 14</em>(24), 5507. <a href="https://doi.org/10.3390/polym14245507">https://doi.org/10.3390/polym14245507</a></li>
         </ol>
 
-        <div class="editorial-notes">
-          <div><h3>Terminología</h3><p>Usar “generado”, “recuperado”, “aceptado” y “material útil” para etapas distintas. Evitar “reciclado” cuando solo se ha recolectado.</p></div>
-          <div><h3>Cifras</h3><p>Redondear según la calidad del dato. No reportar cuatro cifras significativas si c o a tienen incertidumbre amplia.</p></div>
-          <div><h3>Causalidad</h3><p>Escribir “se espera”, “se propone” o “se evaluará” hasta que un diseño pre/post o comparativo demuestre cambio de conducta.</p></div>
+        <div class="callout applied-criteria">
+          <strong>Criterios editoriales aplicados.</strong> El documento distingue PET generado, recuperado, aceptado y útil; redondea las cifras según la calidad de cada dato; y presenta el aprendizaje y el cambio de conducta como hipótesis por evaluar, no como resultados demostrados.
         </div>
       </div>
     </section>
 
-    <section id="tareas-seccion-2">
+    <section id="colaborar">
       <div class="wrap">
         <div class="section-head">
           <div>
-            <p class="eyebrow">08 · tareas para fortalecer la sección 2</p>
-            <h2>Ocho tareas convierten una propuesta plausible en un caso local verificable.</h2>
+            <p class="eyebrow">08 · onboarding y colaboración</p>
+            <h2>Elige una tarea y ayuda a convertir la propuesta en un proyecto verificable.</h2>
           </div>
-          <p class="section-aside">Asignar responsable, fecha y evidencia esperada antes del ensayo general. La prioridad no es agregar más texto, sino cerrar los vacíos que cambian la decisión.</p>
+          <p class="section-aside">Este tablero reúne calidad documental, medición, desarrollo, pedagogía, operación y validación técnica. Marcar una tarea expresa interés; la asignación se confirma con el equipo.</p>
         </div>
 
-        <div class="protocol">
-          <article><h3>Medir la brecha local</h3><p>Encuesta breve de conocimiento y observación de contaminación para evitar asumir qué sabe o hace la comunidad.</p></article>
-          <article><h3>Documentar la ruta real</h3><p>Confirmar contenedores, responsable de retiro, comprador o gestor, frecuencia, criterios de aceptación y destino del material.</p></article>
-          <article><h3>Calibrar la economía</h3><p>Obtener precios, descuentos y rechazos reales para PET limpio, mezclado o húmedo; traducirlos a reglas del juego.</p></article>
-          <article><h3>Mapear mecánicas a objetivos</h3><p>Para cada acción del MVP, escribir el comportamiento real, la consecuencia y la evidencia de aprendizaje esperada.</p></article>
-          <article><h3>Instrumentar el MVP</h3><p>Registrar finalización, decisiones, errores, omisiones, tiempo y respuestas pre/post sin recopilar datos personales innecesarios.</p></article>
-          <article><h3>Predefinir la evaluación</h3><p>Elegir indicadores, calendario, zona de comparación y regla de decisión antes del piloto para evitar interpretar a conveniencia.</p></article>
-          <article><h3>Confirmar el vínculo técnico</h3><p>Documentar HUMAN STEM, responsables, especificación del filamento, ensayos requeridos y límites del uso protésico.</p></article>
-          <article><h3>Preparar evidencia visual</h3><p>Fotografiar la línea base, el material aceptado/rechazado y el flujo real; sustituir frases abstractas por pruebas del campus.</p></article>
-        </div>
+        <ol class="onboarding-steps">
+          <li><strong>Recorre el contexto</strong><span>Lee Estimación y Propuesta; después completa una ruta limpia y otra contaminada en la Simulación.</span></li>
+          <li><strong>Elige por aporte</strong><span>Busca una tarea compatible con tu experiencia o una habilidad que quieras desarrollar.</span></li>
+          <li><strong>Acota antes de editar</strong><span>Confirma responsable, alcance, fecha, dependencia y evidencia de aceptación.</span></li>
+          <li><strong>Deja trazabilidad</strong><span>Comparte fuente, método, archivo y límites; solicita revisión de otra disciplina.</span></li>
+        </ol>
 
         <div class="callout warning">
-          <strong>Orden sugerido para el próximo mes:</strong> línea base y ruta real → calibración del juego → instrumentación del MVP → piloto de comprensión → medición física posterior. Costos y riesgos pueden reactivarse cuando el diseño de medición ya tenga alcance.
+          <strong>Antes de elegir.</strong> Las prioridades P0 desbloquean decisiones o validaciones inmediatas; las P1 dependen de una P0 o preparan la siguiente iteración. No sustituyas un supuesto con otro: si falta un dato, documenta cómo se obtendrá.
         </div>
+
+        <div class="task-board" id="task-board">
+          <article class="task-card">
+            <header><h3>Fuentes y trazabilidad local</h3><span class="task-id">T01 · P0</span></header>
+            <div class="task-meta"><span>Investigación documental</span><span>Gestión ambiental</span></div>
+            <p>Confirma los días operativos, recuperación atribuida a ECOCE, ruta institucional y vínculo con HUMAN STEM. Registra qué afirmación respalda cada fuente.</p>
+            <ul><li><strong>Entrega:</strong> matriz de fuentes con responsable, fecha, periodo, método y alcance.</li><li><strong>Depende de:</strong> acceso a documentos y contactos institucionales.</li></ul>
+            <label class="task-choice"><input type="checkbox" data-task-id="T01" data-task-title="Fuentes y trazabilidad local"> Quiero colaborar en T01</label>
+          </article>
+
+          <article class="task-card">
+            <header><h3>Auditoría del modelo cuantitativo</h3><span class="task-id">T02 · P0</span></header>
+            <div class="task-meta"><span>Estadística</span><span>Ciencia de datos</span></div>
+            <p>Reproduce fórmulas, unidades, escenarios e intervalos; revisa que generado, recuperado, aceptado y útil no se mezclen en el balance.</p>
+            <ul><li><strong>Entrega:</strong> cálculo reproducible y registro de supuestos, errores y sensibilidad.</li><li><strong>Depende de:</strong> definiciones de alcance de T01.</li></ul>
+            <label class="task-choice"><input type="checkbox" data-task-id="T02" data-task-title="Auditoría del modelo cuantitativo"> Quiero colaborar en T02</label>
+          </article>
+
+          <article class="task-card">
+            <header><h3>Línea base en campus</h3><span class="task-id">T03 · P0</span></header>
+            <div class="task-meta"><span>Trabajo de campo</span><span>Operaciones</span><span>Estadística</span></div>
+            <p>Diseña y ejecuta una medición estratificada de botellas, masa seca, rechazo y contaminación por zona, día y turno.</p>
+            <ul><li><strong>Entrega:</strong> protocolo, datos anonimizados, bitácora visual y resumen con incertidumbre.</li><li><strong>Depende de:</strong> permisos, seguridad y criterios operativos de T01.</li></ul>
+            <label class="task-choice"><input type="checkbox" data-task-id="T03" data-task-title="Línea base en campus"> Quiero colaborar en T03</label>
+          </article>
+
+          <article class="task-card">
+            <header><h3>Evaluación de aprendizaje</h3><span class="task-id">T04 · P0</span></header>
+            <div class="task-meta"><span>Pedagogía</span><span>Psicología</span><span>UX research</span></div>
+            <p>Crea un instrumento breve pre/post que mida comprensión de la cadena, del balance de masa y de las consecuencias de contaminar el PET.</p>
+            <ul><li><strong>Entrega:</strong> instrumento, clave, plan de análisis, consentimiento y umbral definido antes del piloto.</li><li><strong>Depende de:</strong> objetivos de aprendizaje y recorrido estable del MVP.</li></ul>
+            <label class="task-choice"><input type="checkbox" data-task-id="T04" data-task-title="Evaluación de aprendizaje"> Quiero colaborar en T04</label>
+          </article>
+
+          <article class="task-card">
+            <header><h3>Instrumentación del simulador</h3><span class="task-id">T05 · P0</span></header>
+            <div class="task-meta"><span>Desarrollo web</span><span>Datos</span><span>Privacidad</span></div>
+            <p>Registra inicio, decisiones, bloqueos, errores, omisiones, tiempo, precio y finalización sin recopilar datos personales innecesarios.</p>
+            <ul><li><strong>Entrega:</strong> diccionario de eventos, implementación, prueba y política de conservación de datos.</li><li><strong>Depende de:</strong> variables de análisis definidas con T04.</li></ul>
+            <label class="task-choice"><input type="checkbox" data-task-id="T05" data-task-title="Instrumentación del simulador"> Quiero colaborar en T05</label>
+          </article>
+
+          <article class="task-card">
+            <header><h3>Pruebas funcionales y accesibilidad</h3><span class="task-id">T06 · P0</span></header>
+            <div class="task-meta"><span>QA</span><span>Accesibilidad</span><span>Frontend</span></div>
+            <p>Automatiza el recorrido de Estimación a Propuesta y luego a Simulación, una ruta limpia, una contaminada y el regreso al documento.</p>
+            <ul><li><strong>Entrega:</strong> pruebas repetibles y reporte en móvil, teclado, lector de pantalla y movimiento reducido.</li><li><strong>Depende de:</strong> versión del recorrido congelada para el piloto.</li></ul>
+            <label class="task-choice"><input type="checkbox" data-task-id="T06" data-task-title="Pruebas funcionales y accesibilidad"> Quiero colaborar en T06</label>
+          </article>
+
+          <article class="task-card">
+            <header><h3>Calibración de reglas económicas</h3><span class="task-id">T07 · P1</span></header>
+            <div class="task-meta"><span>Economía</span><span>Gestión de residuos</span></div>
+            <p>Obtén precios, descuentos y rechazos reales para PET limpio, mezclado o húmedo y tradúcelos a reglas transparentes del MVP.</p>
+            <ul><li><strong>Entrega:</strong> tabla versionada con fuente, unidad, vigencia, rango y regla implementable.</li><li><strong>Depende de:</strong> comprador o gestor confirmado en T01.</li></ul>
+            <label class="task-choice"><input type="checkbox" data-task-id="T07" data-task-title="Calibración de reglas económicas"> Quiero colaborar en T07</label>
+          </article>
+
+          <article class="task-card">
+            <header><h3>Ruta técnica de rPET a prototipo</h3><span class="task-id">T08 · P1</span></header>
+            <div class="task-meta"><span>Materiales</span><span>Mecánica</span><span>Biomédica</span></div>
+            <p>Define especificación del material, lavado, secado, extrusión, caracterización y ensayos antes de considerar una aplicación protésica.</p>
+            <ul><li><strong>Entrega:</strong> diagrama de proceso, criterios de avance, riesgos y límites de uso.</li><li><strong>Depende de:</strong> actor técnico y composición del flujo confirmados.</li></ul>
+            <label class="task-choice"><input type="checkbox" data-task-id="T08" data-task-title="Ruta técnica de rPET a prototipo"> Quiero colaborar en T08</label>
+          </article>
+
+          <article class="task-card">
+            <header><h3>Calidad editorial y visual</h3><span class="task-id">T09 · P1</span></header>
+            <div class="task-meta"><span>Edición</span><span>Diseño</span><span>Comunicación científica</span></div>
+            <p>Revisa lenguaje, fuentes, cifras, causalidad, jerarquía visual y comprensión para personas que llegan por primera vez al proyecto.</p>
+            <ul><li><strong>Entrega:</strong> lista de control resuelta y revisión cruzada de afirmaciones, figuras y referencias.</li><li><strong>Depende de:</strong> resultados estabilizados de T01–T04.</li></ul>
+            <label class="task-choice"><input type="checkbox" data-task-id="T09" data-task-title="Calidad editorial y visual"> Quiero colaborar en T09</label>
+          </article>
+
+          <article class="task-card">
+            <header><h3>Piloto y regla de decisión</h3><span class="task-id">T10 · P1</span></header>
+            <div class="task-meta"><span>Coordinación</span><span>Ética</span><span>Evaluación</span></div>
+            <p>Integra calendario, responsables, riesgos, consentimientos, comparación viable y umbrales para iterar, escalar o detener.</p>
+            <ul><li><strong>Entrega:</strong> protocolo aprobado, matriz RACI, calendario y acta de decisión con límites.</li><li><strong>Depende de:</strong> T03–T06 listas y recursos confirmados.</li></ul>
+            <label class="task-choice"><input type="checkbox" data-task-id="T10" data-task-title="Piloto y regla de decisión"> Quiero colaborar en T10</label>
+          </article>
+        </div>
+
+        <div class="selection-panel">
+          <div>
+            <h3>Tu selección</h3>
+            <p id="selection-help">Se guarda únicamente en este navegador y no asigna la tarea. Copia el mensaje y compártelo con la coordinación para confirmar alcance y responsable.</p>
+            <ul id="selection-list" aria-live="polite"><li>Aún no has seleccionado una tarea.</li></ul>
+          </div>
+          <div class="selection-form">
+            <label>Nombre (opcional)<input id="collaborator-name" type="text" autocomplete="name" placeholder="Cómo quieres que te identifiquen"></label>
+            <label>Perfil o disciplina (opcional)<input id="collaborator-profile" type="text" placeholder="Ej. estadística, diseño, materiales"></label>
+            <button id="copy-task-selection" type="button" disabled>Copiar mensaje de colaboración</button>
+            <p id="selection-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <p class="small muted task-source-link">La versión de seguimiento para responsables, fechas y evidencias de aceptación está en <a href="TAREAS_PROYECTO.md">TAREAS_PROYECTO.md</a>.</p>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="wrap">
-      <p><strong>Versión integrada.</strong> Modelo cuantitativo, problemática, solución propuesta, referencias y tareas reconciliados el 14 de julio de 2026. Documento didáctico: sustituir supuestos por mediciones locales antes de usarlo para decisiones operativas, financieras o de diseño protésico.</p>
+      <p><strong>Versión integrada.</strong> Estimación, propuesta, simulación, referencias y tablero multidisciplinario actualizados el 14 de julio de 2026. Documento didáctico: sustituir supuestos por mediciones locales antes de usarlo para decisiones operativas, financieras o de diseño protésico.</p>
     </div>
   </footer>
 
@@ -1535,6 +1758,107 @@
       });
 
       applyScenario("base");
+    }());
+  </script>
+  <script>
+    (function () {
+      "use strict";
+
+      var storageKey = "map:onboarding:tareas:v1";
+      var checkboxes = Array.prototype.slice.call(document.querySelectorAll("[data-task-id]"));
+      var list = document.getElementById("selection-list");
+      var copyButton = document.getElementById("copy-task-selection");
+      var status = document.getElementById("selection-status");
+
+      function selectedTasks() {
+        return checkboxes.filter(function (checkbox) { return checkbox.checked; }).map(function (checkbox) {
+          return { id: checkbox.getAttribute("data-task-id"), title: checkbox.getAttribute("data-task-title") };
+        });
+      }
+
+      function persist(tasks) {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(tasks.map(function (task) { return task.id; })));
+        } catch (error) {
+          status.textContent = "La selección funciona, pero este navegador no permitió guardarla.";
+        }
+      }
+
+      function renderSelection(shouldPersist) {
+        var tasks = selectedTasks();
+        list.innerHTML = "";
+        if (!tasks.length) {
+          var emptyItem = document.createElement("li");
+          emptyItem.textContent = "Aún no has seleccionado una tarea.";
+          list.appendChild(emptyItem);
+        } else {
+          tasks.forEach(function (task) {
+            var item = document.createElement("li");
+            item.textContent = task.id + " · " + task.title;
+            list.appendChild(item);
+          });
+        }
+        copyButton.disabled = tasks.length === 0;
+        if (shouldPersist) { persist(tasks); }
+      }
+
+      function restoreSelection() {
+        try {
+          var saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
+          checkboxes.forEach(function (checkbox) {
+            checkbox.checked = saved.indexOf(checkbox.getAttribute("data-task-id")) !== -1;
+          });
+        } catch (error) {
+          try { localStorage.removeItem(storageKey); } catch (storageError) { /* La selección seguirá funcionando sin persistencia. */ }
+        }
+        renderSelection(false);
+      }
+
+      function collaborationMessage() {
+        var name = document.getElementById("collaborator-name").value.trim();
+        var profile = document.getElementById("collaborator-profile").value.trim();
+        var tasks = selectedTasks();
+        var lines = ["Hola, me gustaría colaborar en el proyecto PET de FES Acatlán.", ""];
+        tasks.forEach(function (task) { lines.push("- " + task.id + " · " + task.title); });
+        if (name) { lines.push("", "Nombre: " + name); }
+        if (profile) { lines.push("Perfil o disciplina: " + profile); }
+        lines.push("", "Antes de comenzar, quiero confirmar alcance, responsable, fecha, dependencias y evidencia de aceptación.");
+        return lines.join("\n");
+      }
+
+      function fallbackCopy(text) {
+        var textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        var copied = document.execCommand("copy");
+        document.body.removeChild(textarea);
+        return copied ? Promise.resolve() : Promise.reject(new Error("copy failed"));
+      }
+
+      checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener("change", function () {
+          status.textContent = "";
+          renderSelection(true);
+        });
+      });
+
+      copyButton.addEventListener("click", function () {
+        var message = collaborationMessage();
+        var copy = navigator.clipboard && window.isSecureContext
+          ? navigator.clipboard.writeText(message)
+          : fallbackCopy(message);
+        copy.then(function () {
+          status.textContent = "Mensaje copiado. Compártelo con la coordinación para confirmar la tarea.";
+        }).catch(function () {
+          status.textContent = "No se pudo copiar automáticamente. Selecciona menos tareas o inténtalo desde HTTPS.";
+        });
+      });
+
+      restoreSelection();
     }());
   </script>
 </body>

@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>3 · Simulador del MVP PET | FES Acatlán</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3 · Simulación del MVP PET | FES Acatlán</title>
   <style>
     :root {
       --bg: #f4f4f1;
@@ -299,18 +299,18 @@
 <body>
   <header>
     <nav class="project-nav" aria-label="Recorrido integrado del proyecto">
-      <a href="presentacion.html"><strong>1 · Evidencia</strong><span>Problema, modelo y criterios.</span></a>
-      <a href="index.html"><strong>2 · Mapa</strong><span>Ubica un contenedor de PET.</span></a>
-      <a href="reciclaje_pet_fase1.html" aria-current="page"><strong>3 · Simulador</strong><span>Completa el ciclo del MVP.</span></a>
+      <a href="presentacion.html#estimacion"><strong>1 · Estimación</strong><span>Datos, supuestos y modelo.</span></a>
+      <a href="presentacion.html#propuesta"><strong>2 · Propuesta</strong><span>Hipótesis, MVP y validación.</span></a>
+      <a href="reciclaje_pet_fase1.html" aria-current="page"><strong>3 · Simulación</strong><span>Practica el ciclo del MVP.</span></a>
     </nav>
     <h1 id="titulo">Fase 3 · Simulador de la cadena de valor del PET</h1>
     <div class="sub" id="subtitulo">Iteración 1 del MVP: recolectar → procesar → vender. Sin maquinaria ni fase industrial.</div>
-    <div class="phase-objective"><strong>Objetivo mínimo:</strong> completar un ciclo y observar una consecuencia visible de separar o contaminar el material. <a href="presentacion.html#fase-3">Ver validación y tareas de cierre.</a></div>
+    <div class="phase-objective"><strong>Objetivo mínimo:</strong> completar un ciclo y observar una consecuencia visible de separar o contaminar el material. <a href="presentacion.html#fase-3">Ver validación</a> · <a href="presentacion.html#colaborar">Elegir una tarea</a>.</div>
   </header>
 
   <main>
-    <aside>
-      <h2>Estado</h2>
+    <aside aria-labelledby="estado-title">
+      <h2 id="estado-title">Estado</h2>
       <div class="money" id="dinero">$0.00</div>
 
       <div class="row"><strong>Inventario</strong><span id="volumenTexto">0.0 / 10.0</span></div>
@@ -324,11 +324,11 @@
 
       <h3>Poisson no homogénea</h3>
       <div class="generation-controls">
-        <label for="tasaGeneracion">
+        <label>
           Tasa base de este contenedor (botellas/hora simulada)
-          <input id="tasaGeneracion" type="number" min="0" max="240" step="0.5" inputmode="decimal" />
+          <input id="tasaGeneracion" type="number" min="0" max="240" step="0.5" inputmode="decimal">
         </label>
-        <label for="perfilGeneracion">
+        <label>
           Perfil horario
           <select id="perfilGeneracion">
             <option value="campus">Campus completo</option>
@@ -344,11 +344,12 @@
 
       <h3>Ciclo</h3>
       <div class="stack">
-        <button id="btnGenerar">+ generar botella</button>
-        <button id="btnRecolectar">Recolectar una</button>
-        <button id="btnVender">Vender seleccionada</button>
-        <button id="btnVenderTodo">Vender todo</button>
-        <button id="btnVolverMapa" type="button">Volver al mapa</button>
+        <button id="btnGenerar" type="button">+ generar botella</button>
+        <button id="btnRecolectar" type="button">Recolectar una</button>
+        <button id="btnVender" type="button">Vender seleccionada</button>
+        <button id="btnVenderTodo" type="button">Vender todo</button>
+        <button id="btnVolverPropuesta" type="button">Volver a la propuesta</button>
+        <button id="btnVerTareas" type="button">Elegir una tarea del proyecto</button>
       </div>
 
       <div id="mensaje" class="message"></div>
@@ -362,18 +363,18 @@
       <div id="inventario" class="bottle-grid"></div>
     </section>
 
-    <aside>
-      <h2>Procesar botella</h2>
+    <aside aria-labelledby="procesar-title">
+      <h2 id="procesar-title">Procesar botella</h2>
       <div id="detalle" class="details empty">Selecciona una botella del inventario.</div>
 
       <h3>Acciones puras</h3>
       <div class="actions">
-        <button data-accion="destapar">Destapar</button>
-        <button data-accion="quitarEtiqueta">Quitar etiqueta</button>
-        <button data-accion="vaciar">Vaciar</button>
-        <button data-accion="secar">Secar</button>
-        <button data-accion="comprimir">Comprimir</button>
-        <button data-accion="descomprimir">Descomprimir</button>
+        <button data-accion="destapar" type="button">Destapar</button>
+        <button data-accion="quitarEtiqueta" type="button">Quitar etiqueta</button>
+        <button data-accion="vaciar" type="button">Vaciar</button>
+        <button data-accion="secar" type="button">Secar</button>
+        <button data-accion="comprimir" type="button">Comprimir</button>
+        <button data-accion="descomprimir" type="button">Descomprimir</button>
       </div>
 
       <h3>Orden óptimo</h3>
@@ -1220,8 +1221,11 @@
     document.getElementById("btnRecolectar").addEventListener("click", recolectar);
     document.getElementById("btnVender").addEventListener("click", venderSeleccionada);
     document.getElementById("btnVenderTodo").addEventListener("click", venderTodo);
-    document.getElementById("btnVolverMapa").addEventListener("click", () => {
-      location.href = "index.html";
+    document.getElementById("btnVolverPropuesta").addEventListener("click", () => {
+      location.href = "presentacion.html#propuesta";
+    });
+    document.getElementById("btnVerTareas").addEventListener("click", () => {
+      location.href = "presentacion.html#colaborar";
     });
     document.getElementById("btnAlternarGeneracion").addEventListener("click", () => {
       const tipo = estado.generacionActiva ? EVENTOS_PET.PAUSAR : EVENTOS_PET.REANUDAR;
