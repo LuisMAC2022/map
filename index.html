@@ -71,7 +71,7 @@
       width: min(100%, 1180px);
       height: auto;
       max-height: calc(100vh - 2rem);
-      background: white;
+      background: #fdfdfd url("acatlan.png") center / 100% 100% no-repeat;
       border: 1px solid var(--line);
       box-shadow: 0 10px 28px rgba(0,0,0,.12);
       touch-action: manipulation;
@@ -144,6 +144,11 @@
       display: flex;
       flex-wrap: wrap;
       gap: .5rem;
+    }
+
+    .filter-list button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
     }
 
     .result-list {
@@ -280,7 +285,13 @@
 
       <section aria-labelledby="filters-title">
         <h2 id="filters-title">Categorías</h2>
-        <div class="filter-list" id="filters"></div>
+        <div class="filter-list" id="filters">
+          <!-- Categorías futuras; se conservan desactivadas y fuera de la interfaz.
+          <button type="button" disabled>Bebedero</button>
+          <button type="button" disabled>Tapitas</button>
+          <button type="button" disabled>Pilas</button>
+          -->
+        </div>
       </section>
 
       <section class="info-card" id="info" aria-live="polite">
@@ -329,8 +340,9 @@
       svg = doc.documentElement;
 
       ensureViewBox(svg);
+      mostrarFondoAcatlan(svg);
       svg.setAttribute("role", "img");
-      svg.setAttribute("aria-label", "Mapa simplificado de FES Acatlán");
+      svg.setAttribute("aria-label", "Mapa vectorial de FES Acatlán sobre la imagen del campus");
       svg.removeAttribute("width");
       svg.removeAttribute("height");
 
@@ -395,6 +407,11 @@
       }
     }
 
+    function mostrarFondoAcatlan(svgElement) {
+      const fondoVectorial = svgElement.querySelector(":scope > path");
+      if (fondoVectorial) fondoVectorial.setAttribute("fill-opacity", "0");
+    }
+
     function renderFilters() {
       const categories = ["todas", ...new Set(points.map(point => point.categoria))];
 
@@ -403,8 +420,13 @@
         button.type = "button";
         button.textContent = category.replaceAll("_", " ");
         button.dataset.active = String(category === activeCategory);
+        const desactivado = normalizeSearchText(category).includes("bano");
+        button.disabled = desactivado;
+        button.setAttribute("aria-disabled", String(desactivado));
+        if (desactivado) button.title = "Categoría temporalmente desactivada";
 
         button.addEventListener("click", () => {
+          if (desactivado) return;
           activeCategory = category;
           [...filters.children].forEach(child => child.dataset.active = "false");
           button.dataset.active = "true";
